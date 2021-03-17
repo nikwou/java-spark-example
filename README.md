@@ -17,9 +17,9 @@ Conceptually, it may be worth noting the result of the exercise is a table equal
 We want to use cloud processing capabilities in order to get the processing done within a reasonable amount of time. Accordingly, the basic concept is as follows:
 
 * Create and set up a cloud server instance (eg 16 virtual cores, 32 GB of RAM and SSD storage; Linux operating system)
-* Upload the Apache Spark application as a Maven package
-* Build the jar 
-* Run the jar (ie, the Apache Spark application) including the following steps:
+* Upload the Apache Spark application as a Java jar
+* Run the jar in the cloud server instance including the following steps:
+
     * Import CSV dataset
     * Process data
     * Persist results in MySQL database
