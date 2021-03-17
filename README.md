@@ -8,15 +8,13 @@ It may be of general interest to walk through a working and sufficiently perform
 
 A new observation is added daily for each time series; furthermore, new time series are occasionally added (eg due to new listings and IPOs). While the data is evolving, the dataset is provided as a static file, not as a stream.
 
-For each time series in the dataset, we want to compute a number of KPIs like percentage change and linear regressions on a daily basis. Given the amount of raw data, the job can hardly be done in real-time unless a massive computing cluster would be deployed. The requirement here is somewhat more relaxed: we want to get results on a sufficiently powerful cloud server instance. In other words: a real-world-cloud-application for Apache Spark, but without setting up a cluster.
+For each time series in the dataset, we want to compute a number of KPIs like percentage change and linear regressions on a daily basis. The skeleton discussed here was originally developed using the Scala programming language, but once UDFs came into play, it was converted to Java. UDFs are very powerful instruments to add complex calculation functions to Apache Spark.
 
-The skeleton discussed here was originally developed using Apache Zeppelin and the Scala programming language, but once UDFs came into play, it was converted to Java. UDFs are very powerful instruments to add complex calculation functions to Apache Spark.
-
-Conceptually, it may be worth noting that the result of the exercise is a table equal to the input table/CSV, but with more columns; each column holds a specific data analysis result, eg a percent change computation or the result of a linear regression calculation.
+Conceptually, it may be worth noting the result of the exercise is a table equal to the input table/CSV, but with more columns; each column holds a specific data analysis result, eg a percent change computation or the result of a linear regression calculation.
 
 ## Infrastructure concept
 
-As mentioned above, we want to use cloud processing capabilities in order to get the processing done within a reasonable amount of time. Accordingly, the basic concept is as follows:
+We want to use cloud processing capabilities in order to get the processing done within a reasonable amount of time. Accordingly, the basic concept is as follows:
 
 * Create and set up a cloud server instance (eg 16 virtual cores, 32 GB of RAM and SSD storage; Linux operating system)
 * Upload the Apache Spark application as a Maven package
