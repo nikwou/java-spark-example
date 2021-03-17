@@ -18,7 +18,7 @@ The skeleton discussed here was originally developed using Apache Zeppelin and t
 
 As mentioned above, we want to use cloud processing capabilities in order to get the processing done in a reasonable amount of time. Accordingly, the basic concept is as follows:
 
-* Create and set up a cloud server instance with 16 virtual cores, 32 GB of RAM and SSD storage
+* Create and set up a Linux cloud server instance with 16 virtual cores, 32 GB of RAM and SSD storage
 * Upload the Apache Spark application as a Maven package
 * Build the jar 
 * Run the jar (ie, the Apache Spark application) including the following steps:
@@ -26,5 +26,26 @@ As mentioned above, we want to use cloud processing capabilities in order to get
     * Process data
     * Persist results in MySQL database
 
-The resulting MySQL database table - the "work product" - is then dumped and downloaded from the cloud server instance for further use and analysis.
+The resulting MySQL database table - the "work product" - is then dumped and downloaded from the cloud server instance for further use and analysis. Creation and control of the cloud instance playbook is done by a Bash script. Using Docker is an alternative option, but currently, scripting appears to be easier and more flexible.
+
+## The Java code
+
+### Creation of Spark instance
+
+It took me some time to understand the basic concept of an Apache Spark application. Basically, the code described below is a Java application that creates an Apache Spark instance and contains a set of data processing instructions. Such Apache Spark instance consists of at least two other JVMs, the Driver and the Executors. The first step is to create the Apache Spark instance:
+
+    SparkSession spark = SparkSession
+                .builder()
+                .appName("SparkExample")
+                .config("spark.master", "local[*]")
+                .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+                .config("spark.driver.extraJavaOptions", "-XX:ReservedCodeCacheSize=512m -XX:+UseCompressedOops -XX:+UseG1GC -Xss1G")
+                .config("spark.executor.extraJavaOptions", "-XX:ReservedCodeCacheSize=512m -XX:+UseCompressedOops -XX:+UseG1GC -Xss1G")
+                //.config("spark.driver.memory", "8G")
+                //.config("spark.executor.memory", "24G")
+                //.config("spark.ui.port", "4040")
+                .getOrCreate();
+
+### Input CSV data
+
 
