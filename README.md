@@ -24,7 +24,7 @@ We want to use cloud processing capabilities in order to get the processing done
     * Process data
     * Persist results in MySQL database
 
-The resulting MySQL database table - the "work product" - is then dumped and downloaded from the cloud server instance for further use and analysis. Creation and control of the cloud instance playbook is done by a Bash script. Using Docker is an alternative option, but currently, scripting appears to be easier and more flexible.
+The resulting MySQL database table - the "work product" - is then dumped and downloaded from the cloud server instance for further use and analysis. Creation and control of the cloud instance playbook is done by a Bash script. Using Docker may be an alternative option; however, if the cloud instance is killed after processing, scripting appears to be easier and more flexible.
 
 ## The Java code
 
