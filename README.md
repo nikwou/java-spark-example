@@ -16,15 +16,15 @@ The skeleton discussed here was originally developed using Apache Zeppelin and t
 
 ## Infrastructure concept
 
-The application concept discussed here can run on a simple laptop, but given the amount of data and processing required, this takes several hours of time and may produce erratic OOM and other errors. Accordingly, the infrastructure concept was as follows:
+As mentioned above, we want to use cloud processing capabilities in order to get the processing done in a reasonable amount of time. Accordingly, the basic concept is as follows:
 
 * Create and set up a cloud server instance with 16 virtual cores, 32 GB of RAM and SSD storage
 * Upload the Apache Spark application as a Maven package
 * Build the jar 
-* Run the jar (ie Apache Spark application)
-    * Import dataset
+* Run the jar (ie, the Apache Spark application) including the following steps:
+    * Import CSV dataset
     * Process data
-    * Persist data in MySQL database
+    * Persist results in MySQL database
 
-The resulting MySQL dataset - the "work product" - is then dumped and downloaded from the cloud server instance for further use and analysis.
+The resulting MySQL database table - the "work product" - is then dumped and downloaded from the cloud server instance for further use and analysis.
 
